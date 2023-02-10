@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Zegar</title>
+    </head>
+        <body>
+            <h2>Zegar</h2>
+            <div id="zegar"></div>
+            <div id="stopwatch">
+                00:00:00
+            </div>
+            <link rel="stylesheet" href="style.css">
+            <ul id="buttons">
+                <li><button onclick="startTimer()">Start</button></li>
+                <li><button onclick="stopTimer()">Stop</button></li>
+    
+                <li><button onclick="resetTimer()">Reset</button></li>
+            </ul>
+            <script>
+                function zegar() {
+            let dzis =new Date()
+             console.log(dzis)
+             let rok = dzis.getFullYear();
+             console.log(rok)
+             let mc = dzis.getMonth()+1;
+             console.log(mc)
+             let dzien =dzis.getDate();
+             console.log(rok,mc,dzien);
+             let godz = dzis.getHours();
+             let minuta = dzis.getMinutes();
+             if (minuta < 10)
+             minuta = "0"+ minuta;
+             
+             let sek = dzis.getSeconds();
+             console.log(godz,minuta,sek);
+            if(sek < 10) {
+            document.getElementById('zegar').innerHTML = dzien + "." + mc + "." + rok + "." + godz + ":" + minuta + ":0" + sek + ":"
+            }
+            else {
+            document.getElementById('zegar').innerHTML = dzien + "." + mc + "." + rok + "." + godz + ":" + minuta + ":" + sek + ":"
+            }
+             setTimeout("zegar()",1000);
+            
+                }
+         
+                zegar();
+            </script>
+            <script>
+
+
+var showtime=true
+var timer
+var i_sec=0
+
+function clockon() {
+    if (i_sec < 5) {
+            thistime= new Date()
+            var hours=thistime.getHours()
+            var minutes=thistime.getMinutes()
+            var seconds=thistime.getSeconds()
+            if (eval(hours) <10) {hours="0"+hours}
+            if (eval(minutes) < 10) {minutes="0"+minutes}
+            if (seconds < 10) {seconds="0"+seconds}
+            thistime = "----- "+hours+":"+minutes+":"+seconds+" -----"
+            document.forms[0].elements[0].value=thistime
+        i_sec++
+            timer=setTimeout("clockon()",1000)
+    }
+    else {
+        clearTimeout(timer)
+        i_sec=0
+        document.forms[0].elements[0].value="Podaj czas"
+    }
+}
+
+function clockoff() {
+        clearTimeout(timer)
+    document.forms[0].elements[0].value="Podaj czas"
+}
+
+
+</script>
+
+<form>
+<input type="button" value="Podaj czas" onClick="clockon()" onMouseOver="clockon()" onMouseOut="clockoff()">
+</form>
+<script>
+    const timer = document.getElementById('stopwatch');
+    
+    var hr = 0;
+    var min = 0;
+    var sec = 0;
+    var stoptime = true;
+    
+    function startTimer() {
+      if (stoptime == true) {
+            stoptime = false;
+            timerCycle();
+        }
+    }
+    function stopTimer() {
+      if (stoptime == false) {
+        stoptime = true;
+      }
+    }
+    
+    function timerCycle() {
+        if (stoptime == false) {
+        sec = parseInt(sec);
+        min = parseInt(min);
+        hr = parseInt(hr);
+    
+        sec = sec + 1;
+    
+        if (sec == 60) {
+          min = min + 1;
+          sec = 0;
+        }
+        if (min == 60) {
+          hr = hr + 1;
+          min = 0;
+          sec = 0;
+        }
+    
+        if (sec < 10 || sec == 0) {
+          sec = '0' + sec;
+        }
+        if (min < 10 || min == 0) {
+          min = '0' + min;
+        }
+        if (hr < 10 || hr == 0) {
+          hr = '0' + hr;
+        }
+    
+        timer.innerHTML = hr + ':' + min + ':' + sec;
+    
+        setTimeout("timerCycle()", 1000);
+      }
+    }
+    
+    function resetTimer() {
+        timer.innerHTML = '00:00:00';
+    }
+    
+    function resetTimer() {
+        timer.innerHTML = "00:00:00";
+        stoptime = true;
+        hr = 0;
+        sec = 0;
+        min = 0;
+    }
+    </script> 
+        </body>
+    
+</html>
